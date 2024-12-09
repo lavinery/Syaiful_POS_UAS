@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos_app/controllers/cashier_controller.dart';
-import 'package:pos_app/models/product_model.dart';
-import 'package:pos_app/models/transaction_model.dart';
+import 'package:pos_mobile/controllers/cashier_controller.dart';
+import 'package:pos_mobile/models/product_model.dart';
+import 'package:pos_mobile/models/transaction_model.dart';
 
 class CashierContent extends StatelessWidget {
   CashierContent({Key? key}) : super(key: key);

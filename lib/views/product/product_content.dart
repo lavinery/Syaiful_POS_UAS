@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos_app/controllers/product_controller.dart';
-import 'package:pos_app/models/product_model.dart';
+import 'package:pos_mobile/controllers/product_controller.dart';
+import 'package:pos_mobile/models/product_model.dart';
 
 class ProductContent extends StatelessWidget {
   final ProductController controller = Get.put(ProductController());

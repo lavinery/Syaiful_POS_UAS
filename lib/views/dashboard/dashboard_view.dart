@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos_app/controllers/auth_controller.dart';
-import 'package:pos_app/controllers/dashboard_controller.dart';
-import 'package:pos_app/views/dashboard/dashboard_content.dart';
-import 'package:pos_app/views/cashier/cashier_content.dart';
-import 'package:pos_app/views/product/product_content.dart';
+import 'package:pos_mobile/controllers/auth_controller.dart';
+import 'package:pos_mobile/controllers/dashboard_controller.dart';
+import 'package:pos_mobile/views/dashboard/dashboard_content.dart';
+import 'package:pos_mobile/views/cashier/cashier_content.dart';
+import 'package:pos_mobile/views/product/product_content.dart';
 
 class DashboardView extends StatelessWidget {
   final DashboardController controller = Get.put(DashboardController());

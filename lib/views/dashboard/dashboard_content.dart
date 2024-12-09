@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:pos_app/controllers/dashboard_controller.dart';
+import 'package:pos_mobile/controllers/dashboard_controller.dart';
 
 class DashboardContent extends StatelessWidget {
   final DashboardController controller = Get.find<DashboardController>();
