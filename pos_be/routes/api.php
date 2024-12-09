@@ -28,14 +28,13 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
-    Route::post('/logout', [AuthController::class, 'logout']);
+    // Route::post('/logout', [AuthController::class, 'logout']);
 
-    // Dashboard
-    Route::get('/dashboard/stats', [DashboardController::class, 'stats']);
+    // // Dashboard
+    // Route::get('/dashboard/stats', [DashboardController::class, 'stats']);
+    // // Transactions
+    // Route::post('/transactions', [TransactionController::class, 'store']);
 
-    // Transactions
-    Route::post('/transactions', [TransactionController::class, 'store']);
-
-    // Products
-    Route::apiResource('products', ProductController::class);
+    // // Products
+    // Route::apiResource('products', ProductController::class);
 });

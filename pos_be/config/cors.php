@@ -1,10 +1,11 @@
 <?php
+
 return [
 
     /*
-    |----------------------------------------------------------------------
+    |--------------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration
-    |----------------------------------------------------------------------
+    |--------------------------------------------------------------------------
     |
     | Here you may configure your settings for cross-origin resource sharing
     | or "CORS". This determines what cross-origin operations may execute
@@ -14,23 +15,20 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'], // Include your API and Sanctum CSRF path
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    // Allow specific origin(s) (frontend) or use '*' for development.
-    'allowed_origins' => ['http://localhost:55918'], // Update with your frontend URL
+    'allowed_methods' => ['*'],
 
-    // You can list specific HTTP methods that your application will handle.
-    'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow necessary methods
+    'allowed_origins' => ['*'],
 
-    // Allowed headers that can be sent with requests
-    'allowed_headers' => ['Content-Type', 'X-Requested-With', 'Authorization', 'Accept'], // Specify needed headers
+    'allowed_origins_patterns' => [],
 
-    // Enable credentials to be included with requests (e.g., for cookie-based auth with Sanctum)
-    'allowed_credentials' => true,
+    'allowed_headers' => ['*'],
 
-    // Other optional configurations
     'exposed_headers' => [],
+
     'max_age' => 0,
-    'supports_credentials' => true, // Enable if you're using cookies or authentication sessions
+
+    'supports_credentials' => false,
 
 ];

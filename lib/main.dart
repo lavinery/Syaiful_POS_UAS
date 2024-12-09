@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos_app/controllers/auth_controller.dart';
-import 'package:pos_app/views/dashboard/dashboard_view.dart';
-import 'package:pos_app/views/login_view.dart';
-import 'package:pos_app/views/register_view.dart';
+import 'package:pos_mobile/controllers/auth_controller.dart';
+import 'package:pos_mobile/views/dashboard_view.dart';
+import 'package:pos_mobile/views/login_view.dart';
+import 'package:pos_mobile/views/register_view.dart';
+
 
 void main() {
   runApp(MyApp());

@@ -85,12 +85,14 @@ class AuthController extends GetxController {
 
   Future<bool> logout() async {
     try {
+      isLoading.value = true;
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('token');
 
       if (token == null) {
-        errorMessage.value = 'No token found';
-        return false;
+        // Even if there's no token, we should still clear local data
+        await _clearLocalData();
+        return true;
       }
 
       final response = await http.post(
@@ -101,23 +103,40 @@ class AuthController extends GetxController {
         },
       );
 
+      // Whether the server request succeeds or fails, we should clear local data
+      await _clearLocalData();
+
       if (response.statusCode == 200) {
-        await prefs.clear();
-        Get.offAllNamed('/login');
+        Get.snackbar(
+          'Success',
+          'Logged out successfully',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 2),
+        );
         return true;
       } else {
-        errorMessage.value = 'Logout failed';
-        return false;
+        print('Logout failed with status: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        return true; // Still return true as we've cleared local data
       }
     } catch (e) {
-      errorMessage.value = 'Logout failed. Please try again.';
-      Get.snackbar(
-        'Error',
-        'Logout failed. Please try again.',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
-      return false;
+      print('Logout error: $e');
+      // Even on error, we should clear local data
+      await _clearLocalData();
+      return true;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> _clearLocalData() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
+      Get.offAllNamed('/login'); // Navigate to login screen
+    } catch (e) {
+      print('Error clearing local data: $e');
     }
   }
 }

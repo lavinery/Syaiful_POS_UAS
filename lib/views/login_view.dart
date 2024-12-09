@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos_app/controllers/auth_controller.dart';
+import 'package:pos_mobile/controllers/auth_controller.dart';
+
 
 class LoginView extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
