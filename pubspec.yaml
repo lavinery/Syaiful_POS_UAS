@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.5
-  fl_chart: ^0.55.2
+  fl_chart: ^0.69.2
   http: ^1.2.2
   shared_preferences: ^2.0.16
 
