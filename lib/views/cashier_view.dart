@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos_app/controller/cashier_controller.dart';
+import 'package:pos_app/controllers/cashier_controller.dart';
 import '../widgets/sidebar.dart';
 
 class CashierView extends StatelessWidget {

@@ -1,44 +1,98 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos_app/controller/login_controller.dart';
+import 'package:pos_app/controllers/auth_controller.dart';
 
 class LoginView extends StatelessWidget {
-  final LoginController loginController = Get.put(LoginController());
+  final AuthController authController = Get.put(AuthController());
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              onChanged: (value) => loginController.username.value = value,
-              decoration: InputDecoration(labelText: 'Username'),
-            ),
-            TextField(
-              onChanged: (value) => loginController.password.value = value,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'Password'),
-            ),
-            SizedBox(height: 20),
-            Obx(() {
-              return loginController.isLoading.value
-                  ? CircularProgressIndicator()
-                  : ElevatedButton(
-                      onPressed: loginController.login,
-                      child: Text('Login'),
-                    );
-            }),
-            SizedBox(height: 10),
-            Obx(() {
-              return Text(
-                loginController.errorMessage.value,
-                style: TextStyle(color: Colors.red),
-              );
-            }),
-          ],
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints(maxWidth: 400),
+          padding: EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'POS System Login',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 32),
+              TextField(
+                controller: usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.person),
+                ),
+              ),
+              SizedBox(height: 16),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.lock),
+                ),
+              ),
+              SizedBox(height: 24),
+              Obx(() => authController.errorMessage.value.isNotEmpty
+                  ? Padding(
+                      padding: EdgeInsets.only(bottom: 16),
+                      child: Text(
+                        authController.errorMessage.value,
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    )
+                  : SizedBox()),
+              ElevatedButton(
+                onPressed: () async {
+                  if (usernameController.text.isEmpty ||
+                      passwordController.text.isEmpty) {
+                    authController.errorMessage.value =
+                        'Username and password are required';
+                    return;
+                  }
+
+                  final success = await authController.login(
+                    usernameController.text,
+                    passwordController.text,
+                  );
+
+                  if (success) {
+                    Get.offAllNamed('/dashboard');
+                  }
+                },
+                child: Obx(() => authController.isLoading.value
+                    ? CircularProgressIndicator(color: Colors.white)
+                    : Text('Login')),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(double.infinity, 48),
+                ),
+              ),
+              SizedBox(
+                  height:
+                      16), // Tambahkan jarak antara button login dan register
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Don't have an account?"),
+                  TextButton(
+                    onPressed: () => Get.toNamed('/register'),
+                    child: Text('Register here'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
